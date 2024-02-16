@@ -78,6 +78,7 @@ That's where this comes in. I've place Cherry MX blue switches on a custom PCB w
 Using the Pico to act as a USB HID device, I can send the right keyboard signals in order to use it with USFIV.
 This is a redesign of a former project I'd made. The new design implements a split-keyboard layout not often seen in hitbox controllers and is also better than the original in terms of quality and maintainability (the original was a mess of hot glue!)
 https://hackaday.io/project/185796-fight-key-wide
+#$#
 Software Project: This Website!
 website
 img/website.png
