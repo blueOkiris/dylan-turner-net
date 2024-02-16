@@ -2,10 +2,10 @@
 // Implement project carousel scroll
 
 class Project {
-    constructor(title, id, img_src, lines) {
+    constructor(title, id, imgSrc, lines) {
         this.title = title;
         this.id = id;
-        this.img_src = img_src;
+        this.imgSrc = imgSrc;
         this.lines = lines;
     }
 }
@@ -29,10 +29,10 @@ function main() {
         req.send();
         success = req.status;
     }
-    let proj_txts = req.responseText.split('\n#$#\n');
+    let projTxts = req.responseText.split('\n#$#\n');
     let projs = [];
-    for (let proj_txt of proj_txts) {
-        let lines = proj_txt.split('\n');
+    for (let projTxt of projTxts) {
+        let lines = projTxt.split('\n');
         projs.push(new Project(lines[0], lines[1], lines[2], lines.slice(3)));
     }
 
@@ -79,19 +79,19 @@ function main() {
     // Create images for each project
     for (let proj of projs) {
         let img = document.createElement('img');
-        img.src = proj.img_src;
-        let proj_img = document.createElement('div');
-        proj_img.id = proj.id;
-        proj_img.className = 'proj-img';
+        img.src = proj.imgSrc;
+        let projImg = document.createElement('div');
+        projImg.id = proj.id;
+        projImg.className = 'proj-img';
 
-        proj_img.style.animation = proj.id + ' 1s ease-in-out';
-        proj_img.style.animationPlayState = 'paused';
-        proj_img.style.animationDelay = 'calc(var(--scroll) * -1s)';
-        proj_img.style.animationIterationCount = '1';
-        proj_img.style.animationFillMode = 'both';
+        projImg.style.animation = proj.id + ' 1s ease-in-out';
+        projImg.style.animationPlayState = 'paused';
+        projImg.style.animationDelay = 'calc(var(--scroll) * -1s)';
+        projImg.style.animationIterationCount = '1';
+        projImg.style.animationFillMode = 'both';
 
-        proj_img.appendChild(img);
-        document.body.appendChild(proj_img);
+        projImg.appendChild(img);
+        document.body.appendChild(projImg);
     }
 
     // Create text blurbs for each project
