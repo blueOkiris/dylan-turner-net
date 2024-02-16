@@ -49,10 +49,14 @@ function main() {
     // Have the CSS animations adjust based on len
     let imgFirst = 'opacity: 100; top: 360px; left: 18px';
     let imgInvis = 'opacity: 0; top: -300px; left: -300px;';
+    let imgInvisOdd = 'opacity: 0; top: -300px; right: -300px;';
     let imgVis = 'opacity: 100; top: 80px; left: 20px;';
-    let txtFirst = 'opacity: 100; bottom: 120px; right: 22px'
-    let txtInvis = 'opacity: 0; bottom: -300px; right: -300px;'
+    let imgVisOdd = 'opacity: 100; top: 80px; right: 20px;';
+    let txtFirst = 'opacity: 100; bottom: 120px; right: 22px';
+    let txtInvis = 'opacity: 0; bottom: -300px; right: -300px;';
+    let txtInvisOdd = 'opacity: 0; bottom: -300px; left: -300px;';
     let txtVis = 'opacity: 100; bottom: 100px; right: 22px;';
+    let txtVisOdd = 'opacity: 100; bottom: 100px; left: 22px;';
     let spacing = 100.0 / projs.length;
     let styleSheet = document.createElement('style');
     document.head.appendChild(styleSheet);
@@ -61,29 +65,41 @@ function main() {
         let imgRule =
             '@keyframes ' + proj.id + ' {\n'
                 + (i != 0 ?
-                    '\t0% { ' + imgInvis + ' }\n'
+                    '\t0% { ' + (i % 2 == 0 ? imgInvis : imgInvisOdd) + ' }\n'
                         + '\t' + Math.floor(i * spacing - 5).toString()
-                            + '% { ' + imgInvis + ' }\n'
-                        + '\t' + Math.floor(i * spacing).toString() + '% { ' + imgVis + ' }\n' :
+                            + '% { ' + (i % 2 == 0 ? imgInvis : imgInvisOdd) + ' }\n'
+                        + '\t' + Math.floor(i * spacing).toString()
+                            + '% { ' + (i % 2 == 0 ? imgVis : imgVisOdd) + ' }\n' :
                     '\t0% { ' + imgFirst + ' }\n'
-                        + '\t2% { ' + imgVis + ' }\n'
-                        + '\t7% { ' + imgVis + ' }\n')
-                + '\t' + Math.floor((i + 1) * spacing).toString() + '% { ' + imgInvis + ' }\n'
-                + '\t100% { ' + (i < projs.length - 1 ? imgInvis : imgVis) + ' }\n'
+                        + '\t2% { ' + (i % 2 == 0 ? imgVis : imgVisOdd) + ' }\n'
+                        + '\t7% { ' + (i % 2 == 0 ? imgVis : imgVisOdd) + ' }\n')
+                + '\t' + Math.floor((i + 1) * spacing).toString()
+                    + '% { ' + (i % 2 == 0 ? imgInvis : imgInvisOdd) + ' }\n'
+                + '\t100% { '
+                    + (i < projs.length - 1 ?
+                        (i % 2 == 0 ? imgInvis : imgInvisOdd) :
+                        (i % 2 == 0 ? imgVis : imgVisOdd))
+                    + ' }\n'
                 + '}\n';
         styleSheet.sheet.insertRule(imgRule, styleSheet.sheet.cssRules.length);
         let txtRule =
             '@keyframes ' + proj.id + '_blurb {\n'
                 + (i != 0 ?
-                    '\t0% { ' + txtInvis + ' }\n'
+                    '\t0% { ' + (i % 2 == 0 ? txtInvis : txtInvisOdd) + ' }\n'
                         + '\t' + Math.floor(i * spacing - 5).toString()
-                            + '% { ' + txtInvis + ' }\n'
-                        + '\t' + Math.floor(i * spacing).toString() + '% { ' + txtVis + ' }\n' :
+                            + '% { ' + (i % 2 == 0 ? txtInvis : txtInvisOdd) + ' }\n'
+                        + '\t' + Math.floor(i * spacing).toString() + '% { '
+                            + (i % 2 == 0 ? txtVis : txtVisOdd) + ' }\n' :
                     '\t0% { ' + txtFirst + ' }\n'
                         + '\t2% { ' + txtVis + ' }\n'
                         + '\t7% { ' + txtVis + ' }\n')
-                + '\t' + Math.floor((i + 1) * spacing).toString() + '% { ' + txtInvis + ' }\n'
-                + '\t100% { ' + (i < projs.length - 1 ? txtInvis : txtVis) + ' }\n'
+                + '\t' + Math.floor((i + 1) * spacing).toString()
+                    + '% { ' + (i % 2 == 0 ? txtInvis : txtInvisOdd) + ' }\n'
+                + '\t100% { '
+                    + (i < projs.length - 1 ?
+                        (i % 2 == 0 ? txtInvis : txtInvisOdd) :
+                        (i % 2 == 0 ? txtVis : txtVisOdd))
+                    + ' }\n'
                 + '}\n';
         styleSheet.sheet.insertRule(txtRule, styleSheet.sheet.cssRules.length);
     }
