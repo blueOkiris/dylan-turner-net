@@ -4,7 +4,7 @@
 
 Personal portfolio website for Dylan Turner
 
-## Run
+## Testing
 
-`trunk serve`
+To test run: `python3 -m http.server`
 
