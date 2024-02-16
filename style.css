@@ -1,0 +1,77 @@
+/* Author: Dylan Turner <dylan.turner@tutanota.com> */
+/* Style the website and handle scroll animation for project carousel */
+
+body {
+    background-color: #000510;
+
+    animation: body 1s linear;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+@keyframes body {
+    to {
+        background-color: #102050;
+    }
+}
+
+.banner {
+    display: flex;
+    flex-direction: row;
+    background-color: #AA1010;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 20px;
+
+    animation: banner 1s linear;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -5s);
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+
+@keyframes banner {
+    to {
+        opacity: 0;
+    }
+}
+
+#profile-pic {
+    width: 40%;
+    height: auto;
+    object-fit: scale-down;
+}
+
+.banner > div {
+    padding: 0px 0px 0px 20px;
+}
+
+.proj-img {
+    position: fixed;
+    width: 30vw;
+    height: 50vh;
+    padding: 10px;
+    background-color: #10AA10;
+    border-radius: 20px;
+    margin: 10px;
+    top: 0px;
+    left: 0px;
+}
+
+.proj-img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+.proj-blurb {
+    position: fixed;
+    background-color: #10AA10;
+    width: 60vw;
+    height: 50vh;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px;
+}
+

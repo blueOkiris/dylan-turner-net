@@ -1,0 +1,80 @@
+Hardware Project: The Game-Card
+gamecard
+img/gamecard.webp
+Featured on the Hackaday blog, the Game-Card is game console with the dimensions of a typical business card (3.5x2").
+Unlike most small Arduino game consoles, the Game Card ALSO plays multiple games without having to re-flash the system, i.e. it's actually a console, unlike the others which are really just one game.
+It has two parts: the card itself and the cartridge. The console is simply a shell. It contains buttons and an OLED display. The shell is also used for powering the MCU through from a CR2302. The cartridges plug into the port on the bottom and contain the actual MCUs with the flashed games, using the ATtiny84A.
+A more powerful MCU could theoretically be used in carts to expand the functionality. For instance, multiplayer carts could attach some sort of connection port
+Currently working on an improved version with a sleek new look that's fully manufacturable and sellable.
+https://hackaday.com/2021/08/16/diy-handheld-game-puts-its-brains-on-a-removable-cart/
+#$#
+Software Project: Background Remover (bgrm)
+bgrm
+img/bgrm.png
+Back in the day, applications like Microsoft Teams didn't have background removal on their Linux versions nor the web ones. One of Teams' coolest features didn't exist in the Linux version. As someone who uses Linux for their daily driver, this annoys me.
+Well, I'm an engineer, so of course, I found a solution.
+Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write data to), I threw together a Python application that takes your normal webcam input, removes and replaces the background, and outputs that to the created video device. Problem solved :)
+This doesn't just work for Teams though, it works anywhere a WebCam is used!
+You can disable the pop-up, use a background blur, simply remove the background, etc. There are lots of tweaks and options. The program can even be used to remove backgrounds from video files and save them as video files instead of a camera which I've made use of for music videos in the past.
+https://github.com/blueOkiris/bgrm
+#$#
+Non-Technical Skills: Music
+music
+img/spotify.png
+You didn't think it was all engineering? I love to make, and that includes making music.
+I'm a multi-instrumentalist playing ukulele, bass, guitar, melodica, percussion, and many other instruments while being an avid song-writer.
+I record my own music, and sometimes make music videos on YouTube.
+I really like to blend genres, taking influence from Jazz, Pop Punk, Funk, and more.
+Check out my stuff on Spotify, Apple Music, and other major streaming platforms.
+https://linktr.ee/KindaABigDyl
+#$#
+Hardware Project: Hudl Remote v2
+hudl_remote
+img/hudl.jpg
+Hudl is a web application that allows for sorting, watching, marking, and reviewing footage for sports play by play. They have remotes that can make controlling the app simpler and allow for use further away from the machine.
+There's a big issue with their remotes though - they're TWO HUNDRED DOLLARS! I wanted to fix this.
+First, I realized that there's a few ways to control the website. The most obvious is clicking the icons, but there's also keyboard shortcuts. I used 2 picos, one to take button and thumbstick inputs and send them over bluetooth & the other to receive the inputs & act as an HID.
+Overall, my remote costs less than $45, so feasibly one could charge anywhere from $50 to $60 and make profit, so I'd say I hit my goal for it.
+https://hackaday.io/project/178471-hudl-remot-v2
+#$#
+Software Project: Aip-Man and Aipster
+aipman
+img/aipster.png
+These days, I use NixOS as my daily driver, but for a few years I was on Fedora, and while on Fedora, I fell in love with a cross-platform package type: AppImages.
+AppImages are convenient because all the dependencies for the packages are contained in a single file that will just work. Set up your base system, and then all your apps can be AppImages. I prefer this to alternatives like Flatpak and Snap for reasons I won't get into.
+Now, it's convenient that you can just run AppImages and they just work, but it's not convenient (or safe) that you have to go download apps off the internet like a Windows user. AppImages needed a platform, and I provieded it.
+I created aip-man (along with a front-end called "aipster" pictured on the right) for installing, removing, and upgrading AppImages from a centralize location like a traditional package manager.
+https://github.com/blueOkiris/aip-man
+#$#
+Hardware Project: The BlueOkiris Gameduino Console
+gameduino
+img/gameduino.webp
+Another feature on the Hackaday blog and one of my first projects ever (ca 14 years old), the BlueOkiris Gameduino Console is a more straight forward prototype-like version of a portable Arduino Game Console.
+Using common Arduino project parts like an UNO as the base, a TFT LCD screen, and a standard analog stick, this simple device could run games off of an SD Card using a custom interpreter as opposed to the cartridge solution I came up with for the Game Card.
+There was a lot of optimization that needed to be done in order for the device to function in any meaningful way, and I had a lot of fun doing so.
+One part I love about this project is that it uses a baby pin and foil as a make shift button, since this is early on in my engineering interests, and I didn't know any better.
+https://hackaday.com/2014/08/01/the-blueokiris-gameduino-console/
+#$#
+Software Project: March Madness Predictor
+mm
+img/mm.png
+I suck at March Madness. It's not a skill I have. Thus, I made an AI to do it for me in my favorite programming language, Rust.
+It's a from scratch implementation of a genetic algorithm neural network used to predict scores for March Madness so I can pwn my friends.
+This was not a serious attempt at a march madness predictor but rather an exercise to gain a deeper understanding of machine learning and improve my skills at Rust async code.
+I also separated out the library from the application, so I could reuse it.
+It worked pretty well, but it settled on the pattern of "whichever team you enter first is the winner," because that's how the data set was created.
+I've started working on a version 2 with a newer, more efficient neural network library and some attempts to fix biases and improve training, but it is not complete as of yet.
+https://github.com/blueOkiris/march-madness-predictor
+#$#
+Hardware Project: Fight-Key Wide
+fightkey
+img/fight-key.jpg
+I wish I was good at fighting games. I'm not.
+I wish I could use a joystick. I cannot.
+What I CAN do is create
+I'm familiar with blue-switch keys. They're what I like and what I'm comfortable with.
+If I want to get better at fighting games, specifically Ultra Street Fighter IV, I need to use a "joystick" that I'm comfortable with.
+That's where this comes in. I've place Cherry MX blue switches on a custom PCB with a 3D printed enclosure (I had to learn CAD for this lol) arranged to have arrow keys on the left and action keys (vertically spaced like a Japanese fight stick) on the right.
+Using the Pico to act as a USB HID device, I can send the right keyboard signals in order to use it with USFIV.
+This is a redesign of a former project I'd made. The new design implements a split-keyboard layout not often seen in hitbox controllers and is also better than the original in terms of quality and maintainability (the original was a mess of hot glue!)
+https://hackaday.io/project/185796-fight-key-wide
