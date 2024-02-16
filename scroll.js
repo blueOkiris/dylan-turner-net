@@ -11,16 +11,6 @@ class Project {
 }
 
 function main() {
-    window.addEventListener(
-        'scroll',
-        () => {
-            document.body.style.setProperty(
-                '--scroll',
-                window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
-            );
-        }, false
-    );
-
     // Parse project content
     let req = new XMLHttpRequest();
     let success = 0;
@@ -36,9 +26,31 @@ function main() {
         projs.push(new Project(lines[0], lines[1], lines[2], lines.slice(3)));
     }
 
+    // Add a CSS scroll variable
+    let stallPerc = 0.5;
+    window.addEventListener(
+        'scroll',
+        () => {
+            // Raw percentage of scroll
+            let scroll = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+
+            // Smooth it out to stop on each project
+            // Basically, scroll normally except lock the value in the imgFirst part of each project
+            // With the exception of the imgFirst project which scrolls for a sec imgFirst
+            let scrollRel = scroll * projs.length;
+            if (scrollRel >= 1.0 && scrollRel - Math.floor(scrollRel) < stallPerc) {
+                scroll = Math.floor(scrollRel) / projs.length;
+            }
+
+            document.body.style.setProperty('--scroll', scroll);
+        }, false
+    );
+
     // Have the CSS animations adjust based on len
-    let invisible = 'opacity: 0; top: -300px; left: -300px;';
-    let visible = 'opacity: 100; top: 80px; left: 20px;';
+    let imgFirst = 'opacity: 100; top: 360px; left: 18px';
+    let imgInvis = 'opacity: 0; top: -300px; left: -300px;';
+    let imgVis = 'opacity: 100; top: 80px; left: 20px;';
+    let txtFirst = 'opacity: 100; bottom: 120px; right: 22px'
     let txtInvis = 'opacity: 0; bottom: -300px; right: -300px;'
     let txtVis = 'opacity: 100; bottom: 100px; right: 22px;';
     let spacing = 100.0 / projs.length;
@@ -48,30 +60,30 @@ function main() {
         let proj = projs[i];
         let imgRule =
             '@keyframes ' + proj.id + ' {\n'
-                + (i == 0 ?
-                    '\t0% { opacity: 100; top: 360px; left: 18px }\n' :
-                    '\t0% { ' + invisible + ' }\n')
-                + (i == 0 ? '' : '\t' + (i * spacing).toString() + '% { ' + invisible + ' }\n')
-                + '\t' + (i * spacing + 5).toString() + '% { ' + visible + ' }\n'
-                + '\t' + ((i + 1) * spacing - 5).toString() + '% { ' + visible + ' }\n'
-                + (i != projs.length - 1 ?
-                    '\t' + ((i + 1) * spacing + 5).toString() + '% { ' + invisible + ' }\n'
-                    : '')
-                + '\t100% { ' + (i != projs.length - 1 ? invisible : visible) + ' }\n'
+                + (i != 0 ?
+                    '\t0% { ' + imgInvis + ' }\n'
+                        + '\t' + Math.floor(i * spacing - 5).toString()
+                            + '% { ' + imgInvis + ' }\n'
+                        + '\t' + Math.floor(i * spacing).toString() + '% { ' + imgVis + ' }\n' :
+                    '\t0% { ' + imgFirst + ' }\n'
+                        + '\t2% { ' + imgVis + ' }\n'
+                        + '\t7% { ' + imgVis + ' }\n')
+                + '\t' + Math.floor((i + 1) * spacing).toString() + '% { ' + imgInvis + ' }\n'
+                + '\t100% { ' + (i < projs.length - 1 ? imgInvis : imgVis) + ' }\n'
                 + '}\n';
         styleSheet.sheet.insertRule(imgRule, styleSheet.sheet.cssRules.length);
         let txtRule =
             '@keyframes ' + proj.id + '_blurb {\n'
-                + (i == 0 ?
-                    '\t0% { opacity: 100; bottom: 120px; right: 22px }\n' :
-                    '\t0% { ' + txtInvis + ' }\n')
-                + (i == 0 ? '' : '\t' + (i * spacing).toString() + '% { ' + txtInvis + ' }\n')
-                + '\t' + (i * spacing + 5).toString() + '% { ' + txtVis + ' }\n'
-                + '\t' + ((i + 1) * spacing - 5).toString() + '% { ' + txtVis + ' }\n'
-                + (i != projs.length - 1 ?
-                    '\t' + ((i + 1) * spacing + 5).toString() + '% { ' + txtInvis + ' }\n'
-                    : '')
-                + '\t100% { ' + (i != projs.length - 1 ? txtInvis : txtVis) + ' }\n'
+                + (i != 0 ?
+                    '\t0% { ' + txtInvis + ' }\n'
+                        + '\t' + Math.floor(i * spacing - 5).toString()
+                            + '% { ' + txtInvis + ' }\n'
+                        + '\t' + Math.floor(i * spacing).toString() + '% { ' + txtVis + ' }\n' :
+                    '\t0% { ' + txtFirst + ' }\n'
+                        + '\t2% { ' + txtVis + ' }\n'
+                        + '\t7% { ' + txtVis + ' }\n')
+                + '\t' + Math.floor((i + 1) * spacing).toString() + '% { ' + txtInvis + ' }\n'
+                + '\t100% { ' + (i < projs.length - 1 ? txtInvis : txtVis) + ' }\n'
                 + '}\n';
         styleSheet.sheet.insertRule(txtRule, styleSheet.sheet.cssRules.length);
     }
