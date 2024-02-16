@@ -2,6 +2,8 @@
 
 ## Description
 
+NOTE: STILL IN PROGRESS, ESPECIALLY STYLING AND FORMAT
+
 Personal portfolio website for Dylan Turner
 
 ## Testing

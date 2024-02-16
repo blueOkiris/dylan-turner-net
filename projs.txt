@@ -78,3 +78,11 @@ That's where this comes in. I've place Cherry MX blue switches on a custom PCB w
 Using the Pico to act as a USB HID device, I can send the right keyboard signals in order to use it with USFIV.
 This is a redesign of a former project I'd made. The new design implements a split-keyboard layout not often seen in hitbox controllers and is also better than the original in terms of quality and maintainability (the original was a mess of hot glue!)
 https://hackaday.io/project/185796-fight-key-wide
+Software Project: This Website!
+website
+img/website.png
+Yes, that's right!
+You can go see the source code for this website. It was programmed in raw JavaScript, CSS, and HTML (no frameworks).
+Here's a secret for scrolling all the way down: originally, it was going to be a WebASM application in Rust using the Iced GUI framework, but well, it was very slow, so that version was scrapped.
+I've released the code under GPL3. Go check it out, and see how it was made :)
+https://github.com/blueOkiris/dylan-turner-net
